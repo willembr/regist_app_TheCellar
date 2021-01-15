@@ -1,0 +1,63 @@
+.Auth{
+    width: 90%;
+    margin:10px auto;
+}
+
+.GetIn {
+    width:300px;
+    padding:0.35em 0.75em;
+    font-size: 1.1em;
+    background: #6683b5;
+    color:white;
+    border:1px solid #ccc;
+    border-radius: 2px 2px 2px 2px; 
+}
+
+.Form2{
+    padding: 0;
+    margin:0;
+}
+
+.Form2 li{
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.Form2 label{
+    flex:1 0 100px;
+    max-width: 100px;
+    padding: 0.35em 0;
+}
+
+.Form2 div{
+    flex:2;
+    display: flex;
+}
+
+.Form2 input[type="email"]{
+    flex:2 0 230px;
+    padding:0.35em 0.75em;
+    font-size: 1.1em;
+}
+
+.Form2 input[type="password"]{
+    box-sizing: border-box;
+    flex:2 0 191px;
+    padding:0.35em 0.75em;
+    font-size: 1.1em;
+    margin-right: 10px;
+}
+
+.Form2 button{
+    box-sizing: border-box;
+    flex:1;
+    max-width: 60px;
+}
+
+@media (min-width:760px){
+    .Auth{
+        width:50%;
+    }
+}

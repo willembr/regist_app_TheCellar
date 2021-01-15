@@ -1,0 +1,29 @@
+body{
+    background-color: #293549;
+    color:white;
+}
+
+.ContactData{
+    width: 90%;
+    margin:10px auto;
+    text-align: center;
+}
+
+.SignUp{
+    outline:none;
+    border: 1px solid #ccc;
+    background-color: white;
+    font:inherit;
+    padding:14px 40px;
+    display:block;
+    margin:20px auto;
+    box-sizing: border-box;
+}
+.ContactMethod{
+    margin:20px 0;
+}
+
+.ContactBtns{
+    padding:0 20px;
+}
+

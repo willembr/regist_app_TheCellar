@@ -1,0 +1,14 @@
+h2{
+    margin-top:0;
+}
+
+.Header{
+    margin:0 auto;
+    text-align: center;
+}
+
+@media screen and (max-width:900px){
+    .Logo{
+        width:80%;
+    }
+   }
