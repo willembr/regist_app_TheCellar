@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Results.css';
-import Header from '../../Components/header/header';
+import Header from '../../Components/UX/header/header';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import axiosContacts from '../../axios-contacts';
@@ -57,6 +57,7 @@ class Results extends Component{
                                          }
                             }
                             this.setState({results:updatedResults});
+                            console.log(updatedResults);
                         })
                         .catch(error => {
                             console.log(error);
@@ -72,9 +73,10 @@ class Results extends Component{
         if(this.state.selectedDay){
             comment = <p>Van deze dag zijn geen resultaten beschikbaar!</p>;
         }
+
         return(
             <div className="Results">
-                {authRedirect}
+                {/* {authRedirect} */}
                 <Header title="De resultaten"/>
                 <DayPicker onDayClick={this.dayClickHandler}/>
                 {this.state.selectedDay ? <p>Je hebt gekozen voor {this.state.selectedDay.toLocaleDateString()}</p> : <p>Kies een dag</p>}
@@ -94,7 +96,8 @@ class Results extends Component{
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.auth.token
+        // isLoggedIn: state.auth.token
+        isLoggedIn:true
     };
 };
 

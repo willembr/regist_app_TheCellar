@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import './Auth.css';
-import Header from '../../Components/header/header';
+import Header from '../../Components/UX/header/header';
 
-import Input from '../../Components/Input/Input';
+import Input from '../../Components/UX/Input/Input';
 import * as actions from '../../Store/actions/index';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import Spinner from '../../Components/Spinner/Spinner';
+import Spinner from '../../Components/UX/Spinner/Spinner';
 import Eye from '../../assets/images/eye.png';
  
 class Auth extends Component{
