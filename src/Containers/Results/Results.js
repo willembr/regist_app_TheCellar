@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Results.css';
 import Header from '../../Components/UX/header/header';
+import moment from 'moment';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import axiosContacts from '../../axios-contacts';
@@ -16,9 +17,9 @@ class Results extends Component{
     }
     dayClickHandler = (day) => {
         this.setState({
-            selectedDay:day
+            selectedDay:moment(day).format("DD/MM/YYYY")
         });
-        this.getData(day);   
+        this.getData(moment(day).format("DD/MM/YYYY"));   
     }
 
     decryptWithAES = (text) => {
@@ -31,6 +32,7 @@ class Results extends Component{
     getData = (day) => {
         axiosContacts.get('/contacts.json')
                         .then(response => {
+
                             const results = response.data;
                             const decryptedResults = [];
                             let updatedResults = [];
@@ -44,8 +46,10 @@ class Results extends Component{
                                     table: this.decryptWithAES(results[key].table)
                                 })    
                             }
+                             console.log(decryptedResults);
+                             console.log(day);
                              for(let key in decryptedResults){
-                                 if(decryptedResults[key].date === day.toLocaleDateString())
+                                 if(decryptedResults[key].date === day)
                                          {
                                                 updatedResults.push({
                                                                          id: key,
@@ -57,7 +61,6 @@ class Results extends Component{
                                          }
                             }
                             this.setState({results:updatedResults});
-                            console.log(updatedResults);
                         })
                         .catch(error => {
                             console.log(error);
@@ -65,21 +68,18 @@ class Results extends Component{
     }
     render(){
         let comment = null;
-        let authRedirect = null;
-        if(!this.props.isLoggedIn)
-         {
-            authRedirect = <Redirect to="/chapel/cellar/19820126/"/>;
-         }
+        let authRedirect = !this.props.isLoggedIn ? <Redirect to="/login"/> : null;
+
         if(this.state.selectedDay){
             comment = <p>Van deze dag zijn geen resultaten beschikbaar!</p>;
         }
 
         return(
             <div className="Results">
-                {/* {authRedirect} */}
+                {authRedirect}
                 <Header title="De resultaten"/>
                 <DayPicker onDayClick={this.dayClickHandler}/>
-                {this.state.selectedDay ? <p>Je hebt gekozen voor {this.state.selectedDay.toLocaleDateString()}</p> : <p>Kies een dag</p>}
+                {this.state.selectedDay ? <p>Je hebt gekozen voor {this.state.selectedDay}</p> : <p>Kies een dag</p>}
                 { this.state.results.length > 0 ? this.state.results.map( res => {
                     return <ContactResult 
                                 key = {res.id}
@@ -96,8 +96,7 @@ class Results extends Component{
 
 const mapStateToProps = state => {
     return {
-        // isLoggedIn: state.auth.token
-        isLoggedIn:true
+        isLoggedIn: state.auth.token
     };
 };
 
