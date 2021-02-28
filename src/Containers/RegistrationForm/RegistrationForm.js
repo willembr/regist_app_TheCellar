@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import './RegistrationForm.css';
-import axiosContact from '../../axios-contacts';
+import axiosContact from '../../hoc/axios-contacts';
 import Header from '../../Components/UX/header/header';
 import Spinner from '../../Components/UX/Spinner/Spinner';
 import CryptoJS from 'crypto-js';

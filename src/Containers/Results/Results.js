@@ -4,91 +4,46 @@ import Header from '../../Components/UX/header/header';
 import moment from 'moment';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import axiosContacts from '../../axios-contacts';
 import ContactResult from '../../Components/contact_result/contact_result';
-import CryptoJS from 'crypto-js';
 import { connect } from 'react-redux';
+import * as actions from '../../Store/actions/index';
 import { Redirect } from 'react-router';
+import Spinner from '../../Components/UX/Spinner/Spinner';
 
 class Results extends Component{
     state={
-        selectedDay:null,
-        results:[]
+        selectedDay:null
     }
     dayClickHandler = (day) => {
         this.setState({
             selectedDay:moment(day).format("DD/MM/YYYY")
-        });
-        this.getData(moment(day).format("DD/MM/YYYY"));   
+        });   
+        this.props.onGetResults(moment(day).format("DD/MM/YYYY"));
     }
 
-    decryptWithAES = (text) => {
-        const passphrase = '26011982';
-        const bytes = CryptoJS.AES.decrypt(text,passphrase);
-        const originalText = bytes.toString(CryptoJS.enc.Utf8);
-        return originalText;
-    }
-
-    getData = (day) => {
-        axiosContacts.get('/contacts.json')
-                        .then(response => {
-
-                            const results = response.data;
-                            const decryptedResults = [];
-                            let updatedResults = [];
-                            for(let key in results){
-                                decryptedResults.push({
-                                    id:key,
-                                    name: this.decryptWithAES(results[key].name),
-                                    contactDetails: this.decryptWithAES(results[key].contactinfo),
-                                    date: this.decryptWithAES(results[key].datum),
-                                    hour : this.decryptWithAES(results[key].inloguur),
-                                    table: this.decryptWithAES(results[key].table)
-                                })    
-                            }
-                             console.log(decryptedResults);
-                             console.log(day);
-                             for(let key in decryptedResults){
-                                 if(decryptedResults[key].date === day)
-                                         {
-                                                updatedResults.push({
-                                                                         id: key,
-                                                                         name: decryptedResults[key].name,
-                                                                         contactDetails: decryptedResults[key].contactDetails,
-                                                                         hour : decryptedResults[key].hour,
-                                                                         table: decryptedResults[key].table
-                                                                     });
-                                         }
-                            }
-                            this.setState({results:updatedResults});
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        });
-    }
     render(){
-        let comment = null;
-        let authRedirect = !this.props.isLoggedIn ? <Redirect to="/login"/> : null;
 
-        if(this.state.selectedDay){
-            comment = <p>Van deze dag zijn geen resultaten beschikbaar!</p>;
-        }
-
+        const authRedirect = !this.props.isLoggedIn ? <Redirect to="/login"/> : null;
+        const chosenDate = this.state.selectedDay ? <p>Je hebt gekozen voor {this.state.selectedDay}</p> : <p>Kies een dag</p>
+        
+        const content = !this.props.loading && this.props.results.length > 0 ? 
+                            this.props.results.map( res => <ContactResult 
+                                                                key = {res.id}
+                                                                name={res.name}
+                                                                contactDetails = {res.contactDetails}
+                                                                hour = {res.hour}
+                                                                table = {res.table} />)
+                            : this.props.loading ? <Spinner/>
+                            : this.props.results.length <= 0 && this.state.selectedDay ? <p>Van deze dag zijn geen resultaten beschikbaar!</p>
+                                                                                       : null;
+                                console.log(this.props.loading);
         return(
             <div className="Results">
                 {authRedirect}
                 <Header title="De resultaten"/>
                 <DayPicker onDayClick={this.dayClickHandler}/>
-                {this.state.selectedDay ? <p>Je hebt gekozen voor {this.state.selectedDay}</p> : <p>Kies een dag</p>}
-                { this.state.results.length > 0 ? this.state.results.map( res => {
-                    return <ContactResult 
-                                key = {res.id}
-                                name={res.name}
-                                contactDetails = {res.contactDetails}
-                                hour = {res.hour}
-                                table = {res.table}
-                    />
-                }) : comment }
+                {chosenDate}
+                { content }
             </div>
         );
     }
@@ -96,8 +51,16 @@ class Results extends Component{
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.auth.token
+        isLoggedIn: state.auth.token,
+        loading: state.results.loading,
+        results : state.results.results
     };
 };
 
-export default connect(mapStateToProps)(Results);
+const mapDispatchToProps = dispatch => {
+    return {
+        onGetResults: (day) => dispatch(actions.results(day))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Results);

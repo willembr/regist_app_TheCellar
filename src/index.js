@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose,combineReducers} from 'redux';
 import { Provider } from 'react-redux';
 import Auth_reducer from './Store/reducers/auth';
+import Results_reducer from './Store/reducers/results';
 import thunk from 'redux-thunk';
 
 import './index.css';
@@ -10,7 +11,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const rootReducer = combineReducers({
-  auth: Auth_reducer
+  auth: Auth_reducer,
+  results: Results_reducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

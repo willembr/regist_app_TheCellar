@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from '../Components/UX/Input/Input';
+import CryptoJS from 'crypto-js';
 
 export function SetForm(form, change, click){
     const formElements = Object.keys(form).map( element => {
@@ -50,6 +51,13 @@ export function UpdatedFormIsValid(updatedForm, identifier){
              updatedFormIsValid = updatedForm[identifier].valid && updatedFormIsValid;
          };
     return updatedFormIsValid;
+}
+
+export function decryptWithAES(text){
+    const passphrase = '26011982';
+    const bytes = CryptoJS.AES.decrypt(text,passphrase);
+    const originalText = bytes.toString(CryptoJS.enc.Utf8);
+    return originalText;
 }
 
 
