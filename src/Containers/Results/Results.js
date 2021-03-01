@@ -4,6 +4,7 @@ import Header from '../../Components/UX/header/header';
 import moment from 'moment';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+import { deleteBeforeThisDay } from '../../Functions/Time';
 import ContactResult from '../../Components/contact_result/contact_result';
 import { connect } from 'react-redux';
 import * as actions from '../../Store/actions/index';
@@ -14,6 +15,12 @@ class Results extends Component{
     state={
         selectedDay:null
     }
+
+
+    componentDidMount(){
+        this.props.AutoDeleteOldData( deleteBeforeThisDay() );
+    }
+
     dayClickHandler = (day) => {
         this.setState({
             selectedDay:moment(day).format("DD/MM/YYYY")
@@ -36,7 +43,6 @@ class Results extends Component{
                             : this.props.loading ? <Spinner/>
                             : this.props.results.length <= 0 && this.state.selectedDay ? <p>Van deze dag zijn geen resultaten beschikbaar!</p>
                                                                                        : null;
-                                console.log(this.props.loading);
         return(
             <div className="Results">
                 {authRedirect}
@@ -59,7 +65,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetResults: (day) => dispatch(actions.results(day))
+        onGetResults: (day) => dispatch(actions.results(day)),
+        AutoDeleteOldData: (deleteBeforeThisDay) => dispatch(actions.autoDeleteResults(deleteBeforeThisDay))
     };
 };
 

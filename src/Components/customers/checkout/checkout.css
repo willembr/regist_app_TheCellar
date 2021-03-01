@@ -1,0 +1,4 @@
+.CheckOut{ margin-bottom: 80px;}
+.CheckOut p{ margin:40px auto }
+.CheckOut > p:nth-child(n+2){ margin:10px }
+.CheckOut img{ margin:40px auto; }

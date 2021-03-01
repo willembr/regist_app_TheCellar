@@ -1,2 +1,6 @@
 export {auth} from './auth';
-export {results} from './results';
+export {
+    results,
+    autoDeleteResults
+    } 
+from './results';
