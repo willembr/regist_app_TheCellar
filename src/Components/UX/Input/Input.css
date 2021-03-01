@@ -33,7 +33,6 @@
     font: inherit;
     padding: 10px;
     display: inline-block;
-    margin: 0 auto;
     box-sizing: border-box;
     flex:0 0 80%;
 }
