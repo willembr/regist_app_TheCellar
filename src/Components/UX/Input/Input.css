@@ -38,12 +38,13 @@
 }
 
 .Input .Eye{
-    flex:0 0 15%;
+    flex:0 0 20%;
     padding: 12px 0 7px;
     outline: none;
     border: 1px solid #ccc;
     background-color: #fff;
     font: inherit;
+    box-sizing: border-box;
 }
 
 .Invalid{
