@@ -31,7 +31,7 @@ class Results extends Component{
     render(){
 
         const authRedirect = !this.props.isLoggedIn ? <Redirect to="/login"/> : null;
-        const chosenDate = this.state.selectedDay ? <p>Je hebt gekozen voor {this.state.selectedDay}</p> : <p>Kies een dag</p>
+        const chosenDate = this.state.selectedDay ? <p className="ChosenDay">Je hebt gekozen voor {this.state.selectedDay}</p> : <p>Kies een dag</p>
         
         const content = !this.props.loading && this.props.results.length > 0 ? 
                             this.props.results.map( res => <ContactResult 

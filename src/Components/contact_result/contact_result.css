@@ -17,6 +17,7 @@
 
 
 @media (min-width:1040px){
+    .Contact_result:first-child{margin-top:30px;}
     .Contact_result li{ text-align: left; }
     .Contact_result li:first-child{ flex:0 0 30%}
     .Contact_result li:nth-child(2){ flex:0 0 40%}
