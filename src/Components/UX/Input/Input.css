@@ -12,6 +12,7 @@
     display: inline-block;
     margin-bottom: 8px;
     flex:0 0 100%;
+    box-sizing: border-box;
 }
 
 .InputElement{
@@ -64,8 +65,12 @@
 }
 
 
-@media screen and (min-width:699px){
-    .Label{ flex: 0 0 20%; }
+@media screen and (min-width:760px){
+    .Label{ 
+        flex: 0 0 20%; 
+        text-align: right;
+        padding-right: 15px;
+    }
     .InputElement{ flex:0 0 80%;}
     .Password{flex:0 0 70%}
     .Input .Eye{flex:0 0 10%}
