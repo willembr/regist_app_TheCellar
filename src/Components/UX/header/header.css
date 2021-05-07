@@ -1,5 +1,5 @@
 h2{
-    margin-top:0;
+    margin-top:20px;
 }
 
 .Header{
@@ -9,6 +9,6 @@ h2{
 
 @media screen and (max-width:900px){
     .Logo{
-        width:80%;
+        width:100%;
     }
    }

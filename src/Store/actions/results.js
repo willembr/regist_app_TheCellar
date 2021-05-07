@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios_contacts from '../../hoc/axios-contacts';
-import { decryptWithAES } from '../../Functions/Form';
+import { DecryptWithAES } from '../../Functions/Form';
 import moment from 'moment';
 
 export const resultsStart = () => {
@@ -92,11 +92,11 @@ function getDecryptedResults(response){
                 for(let key in results){
                         decryptedResults.push({
                                 id:key,
-                                name: decryptWithAES(results[key].name),
-                                contactDetails: decryptWithAES(results[key].contactinfo),
-                                date: decryptWithAES(results[key].datum),
-                                hour : decryptWithAES(results[key].inloguur),
-                                table: decryptWithAES(results[key].table)
+                                name: DecryptWithAES(results[key].name),
+                                contactDetails: DecryptWithAES(results[key].contactinfo),
+                                date: DecryptWithAES(results[key].datum),
+                                hour : DecryptWithAES(results[key].inloguur),
+                                table: DecryptWithAES(results[key].table)
                         })    
                 }
     return decryptedResults; 

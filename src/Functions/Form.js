@@ -53,11 +53,17 @@ export function UpdatedFormIsValid(updatedForm, identifier){
     return updatedFormIsValid;
 }
 
-export function decryptWithAES(text){
+
+export function DecryptWithAES(text){
     const passphrase = '26011982';
     const bytes = CryptoJS.AES.decrypt(text,passphrase);
     const originalText = bytes.toString(CryptoJS.enc.Utf8);
     return originalText;
+}
+
+export function EnCryptWithAes(text){
+    const passphrase = '26011982';
+    return CryptoJS.AES.encrypt(text, passphrase).toString();
 }
 
 

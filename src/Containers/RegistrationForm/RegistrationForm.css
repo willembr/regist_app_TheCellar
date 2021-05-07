@@ -1,5 +1,5 @@
 body{
-    background-color: #293549;
+    background-color: #373d48;
     color:white;
 }
 
@@ -27,3 +27,21 @@ body{
     padding:0 20px;
 }
 
+.Questions{
+    margin:40px 0;
+}
+.Questions select,
+.Questions input,
+.Questions textarea
+{
+    width:80%;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+.Questions textarea{
+    height: 50px;
+}
+
+.Questions h2{
+    margin:20px 0 40px;
+}

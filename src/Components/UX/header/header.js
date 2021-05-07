@@ -1,5 +1,5 @@
 import React from 'react';
-import chapelLogo from '../../../assets/images/chapel_logo.png';
+import chapelLogo from '../../../assets/images/jardin2.jpg';
 import './header.css';
 
 const header = (props) => (

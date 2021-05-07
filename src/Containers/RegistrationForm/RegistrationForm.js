@@ -3,12 +3,12 @@ import './RegistrationForm.css';
 import axiosContact from '../../hoc/axios-contacts';
 import Header from '../../Components/UX/header/header';
 import Spinner from '../../Components/UX/Spinner/Spinner';
-import CryptoJS from 'crypto-js';
+
 import phoneImg from '../../assets/images/phone.png';
 import mailImg from '../../assets/images/mail.png';
 import CheckOut from '../../Components/customers/checkout/checkout';
 import { GetDate, GetTime } from '../../Functions/Time';
-import { SetForm, UpdateForm, UpdatedFormIsValid } from '../../Functions/Form';
+import { SetForm, UpdateForm, UpdatedFormIsValid, EnCryptWithAes } from '../../Functions/Form';
 
 
 class RegistrationForm extends Component{
@@ -84,11 +84,6 @@ class RegistrationForm extends Component{
         });
     }
 
-    enCryptWithAes = (text) => {
-        const passphrase = '26011982';
-        return CryptoJS.AES.encrypt(text, passphrase).toString();
-    }
-
     sendDataHandler = (event) => {
 
         event.preventDefault();
@@ -103,11 +98,11 @@ class RegistrationForm extends Component{
         }
 
         const contactDetails = {
-            datum : this.enCryptWithAes(GetDate()),
-            inloguur : this.enCryptWithAes(GetTime()),
-            table : this.enCryptWithAes(table),
-            name : this.enCryptWithAes(this.state.contactForm.name.value),
-            contactinfo :this.enCryptWithAes(contactInfo)
+            datum : EnCryptWithAes(GetDate()),
+            inloguur : EnCryptWithAes(GetTime()),
+            table : EnCryptWithAes(table),
+            name : EnCryptWithAes(this.state.contactForm.name.value),
+            contactinfo :EnCryptWithAes(contactInfo)
         };
 
         axiosContact.post('/contacts.json', contactDetails)
@@ -135,6 +130,30 @@ class RegistrationForm extends Component{
         let content = !this.state.loggedIn && !this.state.loading ? 
         (
             <form onSubmit={this.sendDataHandler}> 
+            <div className="Questions">
+                <h4>1. Waar is Juma Mechelen gelegen?</h4>
+                <select>
+                    <option>Selecteer een antwoord...</option>
+                    <option>Onder de kleine watertoren</option>
+                    <option>Onder de grote watertoren</option>
+                    <option>Op de jubellaan</option>
+                </select>
+                <h4>2. Waar komt het BMW logo vandaan?</h4>
+                <select>
+                    <option>Selecteer een antwoord...</option>
+                    <option>Van de kleuren van de Zuid-Duitse deelstaat Beieren</option>
+                    <option>Van de propeller van een vliegtuig</option>
+                    <option>Van een draaiend autowiel</option>
+                </select>
+                <h4>3. welke alcoholische dranken bevatten onze Maison?</h4>
+                <textarea placeholder="Welke smaken herken je..."></textarea>
+                <h4>4. Hoelang bestaat de winkel Schockaert in Mechelen ?</h4>
+                <input type="text" placeholder="Hoeveel jaar denken jullie?"></input>
+                <h2>Shiftingsvraag</h2>
+                <h4>5. Hoeveel nieuwe wagens zijn er verkocht binnen Juma group in 2020 ?</h4>
+                <input type="number" placeholder="Het mag gerust ietsje meer zijn..."></input>
+                <h2>Jouw gegevens</h2>
+            </div>
             {formElements[0]}
             <div className="ContactMethod">
                          <p>We kunnen jou best contacteren via :</p>
@@ -142,7 +161,7 @@ class RegistrationForm extends Component{
                          <img alt="mail" className="ContactBtns" src={mailImg} onClick={() => this.showInputHandler("email","phone")}/>
                      </div>
             { form.email.show ? formElements[1] : form.phone.show ? formElements[2] : null}
-            <button disabled={!this.state.formIsValid} className="SignUp">Aanmelden</button>
+            <button disabled={!this.state.formIsValid} className="SignUp">Versturen</button>
             </form>
         ) 
         :  
@@ -151,7 +170,7 @@ class RegistrationForm extends Component{
 
         return(
             <div className="ContactData">
-                <Header title={this.state.loggedIn ? "U bent succesvol ingelogd!" : "Aanwezigheidsformulier"}/>
+                <Header title={this.state.loggedIn ? "U hebt succesvol deelgenomen!" : "BMW JUMA contest"}/>
                 {content}
             </div>
         );
