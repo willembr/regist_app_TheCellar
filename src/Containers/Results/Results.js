@@ -29,20 +29,24 @@ class Results extends Component{
     }
 
     render(){
-
         const authRedirect = !this.props.isLoggedIn ? <Redirect to="/login"/> : null;
         const chosenDate = this.state.selectedDay ? <p className="ChosenDay">Je hebt gekozen voor {this.state.selectedDay}</p> : <p>Kies een dag</p>
-        
         const content = !this.props.loading && this.props.results.length > 0 ? 
                             this.props.results.map( res => <ContactResult 
                                                                 key = {res.id}
                                                                 name={res.name}
                                                                 contactDetails = {res.contactDetails}
                                                                 hour = {res.hour}
-                                                                table = {res.table} />)
+                                                                table = {res.table}
+                                                                jumaLocation = {res.jumaLocation}
+                                                                BMWlogo = {res.BMWlogo}
+                                                                maison = {res.maison}
+                                                                schockaert = {res.schockaert}
+                                                                wagensJuma = {res.wagensJuma}
+                                                                />)
                             : this.props.loading ? <Spinner/>
                             : this.props.results.length <= 0 && this.state.selectedDay ? <p>Van deze dag zijn geen resultaten beschikbaar!</p>
-                                                                                       : null;
+                                                                                     : null;
         return(
             <div className="Results">
                 {authRedirect}

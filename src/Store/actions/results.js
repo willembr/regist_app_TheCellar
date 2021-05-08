@@ -79,10 +79,16 @@ function getUpdatedResults(response, day){
                                         name: decryptedResults[key].name,
                                         contactDetails: decryptedResults[key].contactDetails,
                                         hour : decryptedResults[key].hour,
-                                        table: decryptedResults[key].table
+                                        table: decryptedResults[key].table,
+                                        jumaLocation: decryptedResults[key].jumaLocation,
+                                        BMWlogo: decryptedResults[key].BMWlogo,
+                                        maison: decryptedResults[key].maison,
+                                        schockaert: decryptedResults[key].schockaert,
+                                        wagensJuma: decryptedResults[key].wagensJuma
                                 });
                         }
                 }
+                console.log(updatedResults);
                 return  updatedResults;
 }
 
@@ -96,7 +102,12 @@ function getDecryptedResults(response){
                                 contactDetails: DecryptWithAES(results[key].contactinfo),
                                 date: DecryptWithAES(results[key].datum),
                                 hour : DecryptWithAES(results[key].inloguur),
-                                table: DecryptWithAES(results[key].table)
+                                table: DecryptWithAES(results[key].table),
+                                jumaLocation: DecryptWithAES(results[key].jumaLocation),
+                                BMWlogo: DecryptWithAES(results[key].BMWlogo),
+                                maison: DecryptWithAES(results[key].maison),
+                                schockaert: DecryptWithAES(results[key].schockaert),
+                                wagensJuma: DecryptWithAES(results[key].wagensJuma)
                         })    
                 }
     return decryptedResults; 

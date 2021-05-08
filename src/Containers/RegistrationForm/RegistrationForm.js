@@ -47,7 +47,12 @@ class RegistrationForm extends Component{
         },
         formIsValid:false,
         loading:false,
-        loggedIn:false
+        loggedIn:false,
+        jumaLocation:'',
+        BMWlogo:'',
+        maison:'',
+        schockaert:'',
+        wagensJuma:0
     }
 
     showInputHandler = (identifier,other) => {
@@ -102,9 +107,14 @@ class RegistrationForm extends Component{
             inloguur : EnCryptWithAes(GetTime()),
             table : EnCryptWithAes(table),
             name : EnCryptWithAes(this.state.contactForm.name.value),
-            contactinfo :EnCryptWithAes(contactInfo)
+            contactinfo :EnCryptWithAes(contactInfo),
+            jumaLocation:EnCryptWithAes(this.state.jumaLocation),
+            BMWlogo:EnCryptWithAes(this.state.BMWlogo),
+            maison:EnCryptWithAes(this.state.maison),
+            schockaert:EnCryptWithAes(this.state.schockaert),
+            wagensJuma:EnCryptWithAes(this.state.wagensJuma)
         };
-
+        console.log(contactDetails);
         axiosContact.post('/contacts.json', contactDetails)
                         .then( response => {
                             this.setState({
@@ -120,7 +130,24 @@ class RegistrationForm extends Component{
 
     }
 
-    
+    jumaLocationChangehandler = (event) => {
+        this.setState({jumaLocation: event.target.value})
+    }
+
+    BMWlogoChangehandler = (event) => {
+        this.setState({BMWlogo: event.target.value})
+    }
+
+    maisonChangeHandler = (event) => {
+        this.setState({maison: event.target.value})
+    }
+
+    schockaertChangeHandler = (event) => {
+        this.setState({schockaert: event.target.value})
+    }
+    wagensJumaChangeHandler = (event) => {
+        this.setState({wagensJuma: event.target.value})
+    }
 
     render(){
         const form = this.state.contactForm;
@@ -132,26 +159,26 @@ class RegistrationForm extends Component{
             <form onSubmit={this.sendDataHandler}> 
             <div className="Questions">
                 <h4>1. Waar is Juma Mechelen gelegen?</h4>
-                <select>
+                <select onChange={(event) => this.jumaLocationChangehandler(event)}>
                     <option>Selecteer een antwoord...</option>
                     <option>Onder de kleine watertoren</option>
                     <option>Onder de grote watertoren</option>
                     <option>Op de jubellaan</option>
                 </select>
                 <h4>2. Waar komt het BMW logo vandaan?</h4>
-                <select>
+                <select onChange={(event) => this.BMWlogoChangehandler(event)}>
                     <option>Selecteer een antwoord...</option>
                     <option>Van de kleuren van de Zuid-Duitse deelstaat Beieren</option>
                     <option>Van de propeller van een vliegtuig</option>
                     <option>Van een draaiend autowiel</option>
                 </select>
-                <h4>3. welke alcoholische dranken bevatten onze Maison?</h4>
-                <textarea placeholder="Welke smaken herken je..."></textarea>
-                <h4>4. Hoelang bestaat de winkel Schockaert in Mechelen ?</h4>
-                <input type="text" placeholder="Hoeveel jaar denken jullie?"></input>
+                <h4>3. Welke alcoholische dranken bevatten onze coctail Maison?</h4>
+                <textarea placeholder="Welke smaken herken je..." onChange={(event) => this.maisonChangeHandler(event)}></textarea>
+                <h4>4. Wanneer is de Kaaswinkel Schockaert van start gegaan in Mechelen ?</h4>
+                <input type="text" placeholder="Welk jaartal denken jullie?" onChange={(event) => this.schockaertChangeHandler(event)}></input>
                 <h2>Shiftingsvraag</h2>
-                <h4>5. Hoeveel nieuwe wagens zijn er verkocht binnen Juma group in 2020 ?</h4>
-                <input type="number" placeholder="Het mag gerust ietsje meer zijn..."></input>
+                <h4>5. Hoeveel nieuwe wagens zijn er verkocht binnen de Juma group in 2020 ?</h4>
+                <input type="number" placeholder="Doe maar nekeer zot.." onChange={(event) => this.wagensJumaChangeHandler(event)}></input>
                 <h2>Jouw gegevens</h2>
             </div>
             {formElements[0]}
@@ -166,7 +193,6 @@ class RegistrationForm extends Component{
         ) 
         :  
         this.state.loading ? <Spinner/> : <CheckOut/> ; 
-
 
         return(
             <div className="ContactData">
