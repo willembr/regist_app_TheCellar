@@ -2,11 +2,74 @@ body{
     background-color: #373d48;
     color:white;
 }
+.Intro{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100vw;
+    height: 100vh;
+    background-color: #373d48;
+    padding-top:40px;
+    text-align: center;
+    margin: 0 auto;
+    opacity: 1;
+    animation: IntroAn 1.5s 6s forwards;
+}
+
+
+@keyframes IntroAn{
+    from{opacity:1;}
+    to{opacity: 0;}
+}
 
 .ContactData{
     width: 90%;
     margin:10px auto;
     text-align: center;
+    display: block;
+    opacity: 0;
+    animation: ContactDataAn 1.5s 6.6s forwards;
+}
+
+@keyframes ContactDataAn{
+    from{opacity:0;}
+    to{opacity: 1;}
+}
+
+.Intro .Logo_intro{
+    width:90%;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: LogoAn 1.5s 1s forwards;
+}
+
+@keyframes LogoAn{
+    from{opacity:0;}
+    to{opacity: 1;}
+}
+
+.Intro .Intro_title{
+    opacity: 0;
+    margin: 0 auto;
+    width: 90%;
+    animation: TitleAn 1.5s 2s forwards;
+}
+
+@keyframes TitleAn{
+    from{opacity:0;}
+    to{opacity: 1;}
+}
+
+.Intro .Intro_txt{
+    width: 90%;
+    margin: 20px auto 0;
+    opacity: 0;
+    animation: TitleAn 1.5s 3.5s forwards;
+}
+
+@keyframes TxtAn{
+    from{opacity:0;}
+    to{opacity: 1;}
 }
 
 .SignUp{

@@ -6,6 +6,7 @@ import Spinner from '../../Components/UX/Spinner/Spinner';
 
 import phoneImg from '../../assets/images/phone.png';
 import mailImg from '../../assets/images/mail.png';
+import BMWLogo from '../../assets/images/jardin_intro.jpg';
 import CheckOut from '../../Components/customers/checkout/checkout';
 import { GetDate, GetTime } from '../../Functions/Time';
 import { SetForm, UpdateForm, UpdatedFormIsValid, EnCryptWithAes } from '../../Functions/Form';
@@ -195,10 +196,19 @@ class RegistrationForm extends Component{
         this.state.loading ? <Spinner/> : <CheckOut/> ; 
 
         return(
+            <>
+            <div className="Intro">
+                <img src={BMWLogo} className="Logo_intro" alt="Jardin logo" />
+                <h2 className="Intro_title">Win een BMW Luxury Drive!</h2>
+                <h3 className="Intro_txt">
+                Weekendje weg met een BMW 7 Reeks of BMW 8 Reeks inclusief overnachting in La Réserve in Knokke.
+                </h3>
+                </div>
             <div className="ContactData">
                 <Header title={this.state.loggedIn ? "U hebt succesvol deelgenomen!" : "BMW JUMA contest"}/>
                 {content}
             </div>
+            </>
         );
     }
 };
