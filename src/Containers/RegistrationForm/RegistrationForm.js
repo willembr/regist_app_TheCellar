@@ -173,7 +173,7 @@ class RegistrationForm extends Component{
                     <option>Van de propeller van een vliegtuig</option>
                     <option>Van een draaiend autowiel</option>
                 </select>
-                <h4>3. Welke alcoholische dranken bevatten onze coctail Maison?</h4>
+                <h4>3. Welke <strong>alcoholische</strong> dranken bevatten onze coctail Maison?</h4>
                 <textarea placeholder="Welke smaken herken je..." onChange={(event) => this.maisonChangeHandler(event)}></textarea>
                 <h4>4. Wanneer is de Kaaswinkel Schockaert van start gegaan in Mechelen ?</h4>
                 <input type="text" placeholder="Welk jaartal denken jullie?" onChange={(event) => this.schockaertChangeHandler(event)}></input>
