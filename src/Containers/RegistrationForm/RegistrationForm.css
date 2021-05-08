@@ -13,7 +13,7 @@ body{
     text-align: center;
     margin: 0 auto;
     opacity: 1;
-    animation: IntroAn 1.5s 6s forwards;
+    animation: IntroAn 1.5s 6.5s forwards;
 }
 
 
@@ -28,7 +28,7 @@ body{
     text-align: center;
     display: block;
     opacity: 0;
-    animation: ContactDataAn 1.5s 6.6s forwards;
+    animation: ContactDataAn 1.5s 7.1s forwards;
 }
 
 @keyframes ContactDataAn{
@@ -40,7 +40,7 @@ body{
     width:90%;
     margin-bottom: 10px;
     opacity: 0;
-    animation: LogoAn 1.5s 1s forwards;
+    animation: LogoAn 2s 1s forwards;
 }
 
 @keyframes LogoAn{
@@ -52,7 +52,7 @@ body{
     opacity: 0;
     margin: 0 auto;
     width: 90%;
-    animation: TitleAn 1.5s 2s forwards;
+    animation: TitleAn 1.5s 2.5s forwards;
 }
 
 @keyframes TitleAn{
@@ -64,7 +64,7 @@ body{
     width: 90%;
     margin: 20px auto 0;
     opacity: 0;
-    animation: TitleAn 1.5s 3.5s forwards;
+    animation: TitleAn 1.5s 4s forwards;
 }
 
 @keyframes TxtAn{
