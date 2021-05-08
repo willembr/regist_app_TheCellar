@@ -8,7 +8,7 @@
     justify-content: start;
 }
 
- .Contact_result li{ text-align: center; }
+ .Contact_result li{ text-align: center;flex:0 0 100% }
 
 /* .Contact_result li:first-child{ flex:0 0 100%}
 .Contact_result li:nth-child(2){ flex:0 0 100%}
