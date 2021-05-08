@@ -14,7 +14,7 @@
     }
     
     .Results .DayPicker {
-        position:fixed;
+        position:absolute;
         top:3em;
         left:3em;
     }
