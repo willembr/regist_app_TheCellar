@@ -18,7 +18,7 @@ class Results extends Component{
 
 
     componentDidMount(){
-        this.props.AutoDeleteOldData( deleteBeforeThisDay() );
+        //this.props.AutoDeleteOldData( deleteBeforeThisDay() );
     }
 
     dayClickHandler = (day) => {
@@ -70,7 +70,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onGetResults: (day) => dispatch(actions.results(day)),
-        AutoDeleteOldData: (deleteBeforeThisDay) => dispatch(actions.autoDeleteResults(deleteBeforeThisDay))
+        //AutoDeleteOldData: (deleteBeforeThisDay) => dispatch(actions.autoDeleteResults(deleteBeforeThisDay))
     };
 };
 
