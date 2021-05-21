@@ -4,7 +4,7 @@ import Header from '../../Components/UX/header/header';
 import moment from 'moment';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import { deleteBeforeThisDay } from '../../Functions/Time';
+//import { deleteBeforeThisDay } from '../../Functions/Time';
 import ContactResult from '../../Components/contact_result/contact_result';
 import { connect } from 'react-redux';
 import * as actions from '../../Store/actions/index';
